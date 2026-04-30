@@ -324,6 +324,7 @@
     object-fit: cover;
     transition: transform 0.4s ease;
     background-size: cover;
+    display: block;
   }
   .product-card:hover .card-img {
     transform: scale(1.03);
@@ -514,81 +515,248 @@
 
   /* mobile responsiveness */
   @media (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+    .top-banner {
+      gap: 8px;
+      padding: 7px 10px;
+      font-size: 8px;
+      letter-spacing: 1.4px;
+    }
+    .countdown {
+      gap: 4px;
+    }
+    .countdown-block {
+      min-width: 38px;
+      padding: 3px 5px;
+    }
+    .countdown-block .num {
+      font-size: 18px;
+    }
+    .promo-strip {
+      padding: 6px 10px;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+    }
+    .navbar {
+      height: 56px;
+      padding: 0 14px;
+    }
+    .logo {
+      font-size: 22px;
+    }
+    .logo sup {
+      right: -24px;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .nav-icons svg {
+      width: 17px;
+      height: 17px;
+    }
+    .navbar .nav-links {
+      display: none;
+    }
     .shop-wrapper {
-      padding: 20px 16px;
+      padding: 18px 12px 12px;
+    }
+    .page-title {
+      font-size: 22px;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .toolbar {
+      gap: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .view-icons {
+      gap: 6px;
+    }
+    .view-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+    }
+    .product-count {
+      font-size: 10px;
+    }
+    .sort-btn {
+      font-size: 9px;
     }
     .shop-body {
       flex-direction: column;
+      gap: 14px;
     }
     .filters {
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow-x: auto;
       background: transparent;
       padding: 0;
-      margin-bottom: 8px;
+      margin-bottom: 0;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar {
+      display: none;
     }
     .filter-group {
-      width: auto;
+      flex: 0 0 auto;
+      min-width: max-content;
       border-bottom: none;
       background: #fff6ed;
-      padding: 6px 12px;
+      border: 1px solid #efe0d1;
+      padding: 7px 12px;
       border-radius: 40px;
-      margin-right: 8px;
+      margin-right: 0;
+      position: relative;
     }
     .filter-header {
       font-size: 10px;
+      letter-spacing: 1px;
+      gap: 8px;
     }
     .filter-body {
       position: absolute;
       background: white;
       z-index: 10;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+      border: 1px solid #efe0d1;
+      border-radius: 12px;
       padding: 10px;
-      width: 160px;
+      width: 170px;
       display: none;
+      top: calc(100% + 8px);
+      left: 0;
+    }
+    .checkbox-row {
+      font-size: 10px;
     }
     .filter-group:hover .filter-body {
       display: block;
     }
     .product-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .product-grid.grid-2cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .product-card {
+      border-radius: 12px;
+      box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.18);
+    }
+    .card-img-wrap {
+      aspect-ratio: 3 / 4;
     }
     .product-grid.list-view .card-img-wrap {
       width: 85px;
+      aspect-ratio: 4 / 5;
+    }
+    .product-grid.list-view .product-card {
+      gap: 12px;
+    }
+    .product-grid.list-view .card-info {
+      padding: 8px 8px 8px 0;
+    }
+    .badge {
+      top: 7px;
+      left: 7px;
+      font-size: 7px;
+      padding: 3px 6px;
+    }
+    .wish-btn {
+      top: 7px;
+      right: 7px;
+      width: 26px;
+      height: 26px;
+    }
+    .hover-add-btn {
+      padding: 7px;
+      font-size: 8px;
+      letter-spacing: 1.4px;
+      transform: translateY(0);
+      background: rgba(28, 24, 20, 0.82);
+    }
+    .card-info {
+      padding: 8px 8px 10px;
     }
     .card-name {
       font-size: 10px;
+      line-height: 1.3;
+      min-height: 26px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .rating {
+      gap: 3px;
+      margin-bottom: 4px;
+    }
+    .stars {
+      font-size: 8px;
+      letter-spacing: 0;
+    }
+    .reviews {
+      font-size: 8px;
     }
     .card-price {
       font-size: 11px;
+      line-height: 1.35;
     }
-    .navbar .nav-links {
-      display: none;
-    }
-    .top-banner {
-      gap: 10px;
-      font-size: 9px;
+    .card-price .original,
+    .card-price .discount {
+      font-size: 8px;
     }
   }
 
   @media (max-width: 480px) {
+    .shop-wrapper {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+    .product-count {
+      text-align: center;
+      white-space: nowrap;
+    }
     .product-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
     .product-grid.list-view .product-card {
-      flex-direction: column;
+      flex-direction: row;
     }
     .product-grid.list-view .card-img-wrap {
-      width: 100%;
+      width: 82px;
       aspect-ratio: 4/5;
     }
-    .toolbar .product-count {
-      font-size: 10px;
+    .card-info {
+      padding: 8px 7px 9px;
+    }
+    .card-name {
+      font-size: 9.5px;
+    }
+    .filter-body {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      top: 172px;
+      width: auto;
+      max-height: 42vh;
+      overflow-y: auto;
     }
   }
 </style>
@@ -629,7 +797,7 @@
       <button class="view-btn" data-view="grid-2"><svg viewBox="0 0 16 16"><rect x="0" y="0" width="7" height="7"/><rect x="9" y="0" width="7" height="7"/><rect x="0" y="9" width="7" height="7"/><rect x="9" y="9" width="7" height="7"/></svg></button>
       <button class="view-btn" data-view="list"><svg viewBox="0 0 16 16"><rect x="0" y="2" width="16" height="2"/><rect x="0" y="7" width="16" height="2"/><rect x="0" y="12" width="16" height="2"/></svg></button>
     </div>
-    <span class="product-count">9 heirloom silks</span>
+    <span class="product-count">14 heirloom silks</span>
     <button class="sort-btn">Sort ▾</button>
   </div>
   <div class="shop-body">
@@ -661,18 +829,24 @@
     <p class="tagline">Handwoven with grace ♥</p>
   </div>
 </footer>
+<!-- <a href=""></a> -->
 
 <script>
   const products = [
-    { name: "Riyasat Silk Banarasi — Copper Mauve", original: 8500, price: 6299, discount: "26% off", rating: 4.8, reviews: 142, imgClass: "p1" },
-    { name: "Zari Tussar Silk — Golden Dusk", original: 9200, price: 6999, discount: "24% off", rating: 4.9, reviews: 98, imgClass: "p2" },
-    { name: "Indigo Jamdani Soft Silk — Lilac Haze", original: null, price: 5499, discount: null, rating: 4.7, reviews: 211, imgClass: "p3" },
-    { name: "Chanderi Silk Kalamkari — Rose Plum", original: 7000, price: 4899, discount: "30% off", rating: 4.8, reviews: 76, imgClass: "p4" },
-    { name: "Murshidabad Pure Silk — Sage Blossom", original: null, price: 7799, discount: null, rating: 4.6, reviews: 53, imgClass: "p5" },
-    { name: "Tant Linen Blend — Autumn Wheat", original: 4500, price: 3299, discount: "27% off", rating: 4.5, reviews: 189, imgClass: "p6" },
-    { name: "Kantha Stitch Pure Cotton — Terra Rosa", original: null, price: 4199, discount: null, rating: 4.9, reviews: 312, imgClass: "p7" },
-    { name: "Handwoven Khadi Silk — Ocean Teal", original: 6800, price: 5199, discount: "24% off", rating: 4.7, reviews: 87, imgClass: "p8" },
-    { name: "Baluchari Heritage Silk — Sandalwood", original: null, price: 9899, discount: null, rating: 4.9, reviews: 64, imgClass: "p9" }
+    { name: "Riyasat Silk Banarasi — Copper Mauve", original: 8500, price: 6299, discount: "26% off", rating: 4.8, reviews: 142, img: "./img/Gamcha.jpg", imgClass: "p1" },
+    { name: "Zari Tussar Silk — Golden Dusk", original: 9200, price: 6999, discount: "24% off", rating: 4.9, reviews: 98, img: "./img/Saree 10.jpg", imgClass: "p2" },
+    { name: "Indigo Jamdani Soft Silk — Lilac Haze", original: null, price: 5499, discount: null, rating: 4.7, reviews: 211, img: "./img/Saree 11.jpg", imgClass: "p3" },
+    { name: "Chanderi Silk Kalamkari — Rose Plum", original: 7000, price: 4899, discount: "30% off", rating: 4.8, reviews: 76, img: "./img/Saree 12.jpg", imgClass: "p4" },
+    { name: "Murshidabad Pure Silk — Sage Blossom", original: null, price: 7799, discount: null, rating: 4.6, reviews: 53, img: "./img/Saree 13.jpg", imgClass: "p5" },
+    { name: "Tant Linen Blend — Autumn Wheat", original: 4500, price: 3299, discount: "27% off", rating: 4.5, reviews: 189, img: "./img/Saree 14.jpg", imgClass: "p6" },
+    { name: "Kantha Stitch Pure Cotton — Terra Rosa", original: null, price: 4199, discount: null, rating: 4.9, reviews: 312, img: "./img/Saree 7.jpg", imgClass: "p7" },
+    { name: "Handwoven Khadi Silk — Ocean Teal", original: 6800, price: 5199, discount: "24% off", rating: 4.7, reviews: 87, img: "./img/Saree 8.jpg", imgClass: "p8" },
+    { name: "Baluchari Heritage Silk — Sandalwood", original: null, price: 9899, discount: null, rating: 4.9, reviews: 64, img: "./img/Saree 9.jpg", imgClass: "p9" },
+    { name: "Bengal Soft Silk — Morning Blush", original: 6200, price: 4699, discount: "24% off", rating: 4.7, reviews: 118, img: "./img/saree 2.jpg", imgClass: "p1" },
+    { name: "Classic Woven Saree — Ivory Gold", original: null, price: 5999, discount: null, rating: 4.8, reviews: 91, img: "./img/Saree 3.jpg", imgClass: "p2" },
+    { name: "Festive Handloom Saree — Royal Pink", original: 7600, price: 5599, discount: "26% off", rating: 4.6, reviews: 73, img: "./img/Saree 4.jpg", imgClass: "p3" },
+    { name: "Everyday Cotton Saree — Soft Meadow", original: null, price: 3899, discount: null, rating: 4.5, reviews: 156, img: "./img/Saree 5.jpg", imgClass: "p4" },
+    { name: "Premium Silk Saree — Temple Border", original: 8800, price: 6599, discount: "25% off", rating: 4.9, reviews: 204, img: "./img/Saree 6.jpg", imgClass: "p5" }
   ];
 
   function renderProducts() {
@@ -681,7 +855,10 @@
     grid.innerHTML = products.map((p, idx) => `
       <div class="product-card" data-product-idx="${idx}">
         <div class="card-img-wrap">
-          <div class="card-img ${p.imgClass}"></div>
+          ${p.img
+            ? `<img class="card-img" src="${p.img}" alt="${p.name}">`
+            : `<div class="card-img ${p.imgClass}"></div>`
+          }
           <span class="badge">Bestseller</span>
           <button class="wish-btn"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
           <div class="hover-add-btn">ADD TO CART</div>
@@ -693,6 +870,7 @@
         </div>
       </div>
     `).join('');
+    
 
     document.querySelectorAll('.wish-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
