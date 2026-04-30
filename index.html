@@ -198,6 +198,19 @@
         color: var(--deep-charcoal);
         text-decoration: none;
         position: relative;
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 142px;
+        height: 48px;
+        overflow: hidden;
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        object-position: left center;
       }
       .logo sup {
         font-size: 8px;
@@ -723,6 +736,53 @@
         color: var(--deep-charcoal);
         font-weight: 600;
       }
+      .sort-wrap {
+        position: relative;
+      }
+      .sort-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        min-width: 190px;
+        background: #fffaf4;
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        box-shadow: 0 18px 34px -24px rgba(50, 35, 20, 0.5);
+        padding: 6px;
+        z-index: 40;
+        display: none;
+      }
+      .sort-wrap.active .sort-menu {
+        display: grid;
+      }
+      .sort-option {
+        border: none;
+        background: transparent;
+        text-align: left;
+        padding: 10px 11px;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 11px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        color: var(--deep-charcoal);
+      }
+      .sort-option:hover,
+      .sort-option.active {
+        background: #fff1e2;
+        color: var(--burnt-orange);
+      }
+      .no-results {
+        grid-column: 1 / -1;
+        background: #fffaf4;
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: 36px 20px;
+        text-align: center;
+        color: var(--muted-stone);
+        font-size: 13px;
+        letter-spacing: 1px;
+      }
 
       /* shop body: filters + grid */
       .shop-body {
@@ -1013,10 +1073,51 @@
 
       /* footer remains elegant but compact */
       footer {
-        background: #1f1b17;
+        background:
+          radial-gradient(circle at top left, rgba(184, 134, 53, 0.16), transparent 34%),
+          #1f1b17;
         color: #d9cdc0;
         margin-top: 60px;
-        padding: 40px 5% 0;
+        padding: 44px 5% 0;
+      }
+      .footer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(150px, 1fr));
+        gap: 34px;
+        padding-bottom: 34px;
+        border-bottom: 1px solid #3a3028;
+      }
+      .footer-brand img {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+        filter: brightness(1.18);
+        margin-bottom: 14px;
+      }
+      .footer-brand p {
+        max-width: 310px;
+        color: #b9ab9a;
+        font-size: 12px;
+        line-height: 1.65;
+        margin-bottom: 18px;
+      }
+      .trust-row {
+        display: grid;
+        gap: 8px;
+      }
+      .trust-pill {
+        width: fit-content;
+        border: 1px solid #4a3f36;
+        border-radius: 999px;
+        padding: 7px 11px;
+        color: #ead9c5;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
       }
       .footer-grid {
         display: grid;
@@ -1026,16 +1127,33 @@
         border-bottom: 1px solid #3a3028;
       }
       .footer-col h4 {
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 2.5px;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
+        color: #fff0dd;
+        text-transform: uppercase;
       }
       .footer-col a,
       .footer-col p {
-        font-size: 10px;
-        margin-bottom: 6px;
+        display: block;
+        font-size: 11px;
+        margin-bottom: 9px;
         color: #b2a38f;
         text-decoration: none;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+      .footer-col a:hover {
+        color: #f0d1a9;
+        transform: translateX(3px);
+      }
+      .newsletter-card {
+        background: rgba(255, 248, 240, 0.05);
+        border: 1px solid #3f352d;
+        border-radius: 8px;
+        padding: 16px;
+      }
+      .newsletter-card p {
+        line-height: 1.55;
       }
       .newsletter-input {
         background: #2f2822;
@@ -1045,31 +1163,72 @@
         border-radius: 40px;
         width: 100%;
         margin-bottom: 8px;
+        color: #f7ede4;
       }
       .subscribe-btn {
-        background: transparent;
+        background: #f0d1a9;
         border: 1px solid #b88635;
-        padding: 6px 18px;
+        color: #1f1b17;
+        padding: 8px 18px;
         font-size: 9px;
         letter-spacing: 2px;
         border-radius: 40px;
         cursor: pointer;
+        font-weight: 700;
+      }
+      .newsletter-note {
+        min-height: 16px;
+        margin-top: 8px;
+        color: #f0d1a9;
+        font-size: 10px;
+      }
+      .footer-service-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: #3a3028;
+        margin-top: 28px;
+        border: 1px solid #3a3028;
+      }
+      .service-item {
+        background: #231e1a;
+        padding: 14px 12px;
+      }
+      .service-item strong {
+        display: block;
+        color: #f7ede4;
+        font-size: 10px;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .service-item span {
+        color: #b2a38f;
+        font-size: 10px;
       }
       .footer-bottom {
-        padding: 20px 0;
-        text-align: center;
+        padding: 22px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
       }
       .social-links {
         display: flex;
-        gap: 20px;
+        gap: 10px;
         justify-content: center;
-        margin-bottom: 12px;
         flex-wrap: wrap;
       }
       .social-links a {
+        border: 1px solid #3f352d;
+        border-radius: 999px;
+        padding: 7px 10px;
         font-size: 9px;
+        letter-spacing: 1.3px;
         color: #b8a690;
         text-decoration: none;
+        text-transform: uppercase;
       }
       .copyright {
         font-size: 8px;
@@ -1078,6 +1237,17 @@
       .tagline {
         font-size: 11px;
         font-style: italic;
+      }
+      .back-top {
+        border: 1px solid #b88635;
+        background: transparent;
+        color: #f0d1a9;
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 9px;
+        letter-spacing: 1.8px;
+        cursor: pointer;
+        text-transform: uppercase;
       }
 
       /* mobile responsiveness */
@@ -1116,6 +1286,8 @@
           padding: 0 14px;
         }
         .logo {
+          width: 118px;
+          height: 42px;
           font-size: 22px;
         }
         .logo sup {
@@ -1298,6 +1470,21 @@
         .card-price .discount {
           font-size: 8px;
         }
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+        .footer-brand,
+        .newsletter-card {
+          grid-column: 1 / -1;
+        }
+        .footer-service-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-bottom {
+          align-items: flex-start;
+          flex-direction: column;
+        }
       }
 
       @media (max-width: 480px) {
@@ -1344,6 +1531,10 @@
         .cart-drawer {
           width: 100vw;
         }
+        .footer-top,
+        .footer-service-strip {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1384,9 +1575,9 @@
       >
     </div>
 
-    <nav class="navbar">
-      <a href="./index.html" class="logo">BrajaBuli<sup>new</sup></a>
-      <ul class="nav-links">
+      <nav class="navbar">
+        <a href="./index.html" class="logo"><img src="./img/Brajabuli.png" alt="BrajaBuli"></a>
+      <ul class="nav-links">    
         <li><a href="./index.html">Saree</a></li>
         <li><a href="./index.html">Blouse</a></li>
         <li><a href="./women.html">Women</a></li>
@@ -1509,8 +1700,17 @@
             </svg>
           </button>
         </div>
-        <span class="product-count">14 heirloom silks</span>
-        <button class="sort-btn">Sort ▾</button>
+        <span class="product-count" id="productCount">14 heirloom silks</span>
+        <div class="sort-wrap" id="sortWrap">
+          <button class="sort-btn" id="sortButton" type="button">Sort ▾</button>
+          <div class="sort-menu" id="sortMenu">
+            <button class="sort-option active" type="button" data-sort="featured">Featured</button>
+            <button class="sort-option" type="button" data-sort="price-low">Price: Low to High</button>
+            <button class="sort-option" type="button" data-sort="price-high">Price: High to Low</button>
+            <button class="sort-option" type="button" data-sort="rating">Top Rated</button>
+            <button class="sort-option" type="button" data-sort="newest">Newest First</button>
+          </div>
+        </div>
       </div>
       <div class="shop-body">
         <aside class="filters">
@@ -1521,7 +1721,7 @@
             </div>
             <div class="filter-body">
               <label class="checkbox-row"
-                ><input type="checkbox" id="inStockCheck" checked /> In Stock
+                ><input type="checkbox" id="inStockCheck" data-filter="stock" checked /> In Stock
                 Only</label
               >
             </div>
@@ -1530,11 +1730,11 @@
             <div class="filter-header">Price ▾</div>
             <div class="filter-body">
               <label class="checkbox-row"
-                ><input type="checkbox" /> Under ₹5000</label
+                ><input type="checkbox" data-filter="price" value="under-5000" /> Under ₹5000</label
               ><label class="checkbox-row"
-                ><input type="checkbox" /> ₹5000–₹8000</label
+                ><input type="checkbox" data-filter="price" value="5000-8000" /> ₹5000–₹8000</label
               ><label class="checkbox-row"
-                ><input type="checkbox" /> Above ₹8000</label
+                ><input type="checkbox" data-filter="price" value="above-8000" /> Above ₹8000</label
               >
             </div>
           </div>
@@ -1542,11 +1742,11 @@
             <div class="filter-header">Category ▾</div>
             <div class="filter-body">
               <label class="checkbox-row"
-                ><input type="checkbox" /> Banarasi Silk</label
+                ><input type="checkbox" data-filter="category" value="Banarasi Silk" /> Banarasi Silk</label
               ><label class="checkbox-row"
-                ><input type="checkbox" /> Tussar & Matka</label
+                ><input type="checkbox" data-filter="category" value="Tussar & Matka" /> Tussar & Matka</label
               ><label class="checkbox-row"
-                ><input type="checkbox" /> Cotton Jamdani</label
+                ><input type="checkbox" data-filter="category" value="Cotton Jamdani" /> Cotton Jamdani</label
               >
             </div>
           </div>
@@ -1554,9 +1754,9 @@
             <div class="filter-header">Blouse Piece ▾</div>
             <div class="filter-body">
               <label class="checkbox-row"
-                ><input type="checkbox" /> Included</label
+                ><input type="checkbox" data-filter="blouse" value="included" /> Included</label
               ><label class="checkbox-row"
-                ><input type="checkbox" /> Not Included</label
+                ><input type="checkbox" data-filter="blouse" value="not-included" /> Not Included</label
               >
             </div>
           </div>
@@ -1567,41 +1767,64 @@
     </div>
 
     <footer>
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>Customer Service</h4>
-          <a href="#">Track Order</a><a href="#">Store Locator</a
-          ><a href="#">Returns</a><a href="#">Privacy</a>
+      <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="./img/Brajabuli.png" alt="BrajaBuli">
+          <p>Handpicked sarees, soft silks, and everyday heirloom pieces inspired by Bengal's craft stories.</p>
+          <div class="trust-row">
+            <span class="trust-pill">Secure Checkout</span>
+            <span class="trust-pill">Easy 7 Day Exchange</span>
+            <span class="trust-pill">Handloom First</span>
+          </div>
         </div>
         <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#">Contact Us</a><a href="#">FAQ</a
-          ><a href="#" class="hiring">We Are Hiring!</a
-          ><a href="#">Wholesale</a>
+          <h4>Shop</h4>
+          <a href="#">Hot Sellers</a><a href="#">New Arrivals</a
+          ><a href="#">Banarasi Silk</a><a href="#">Cotton Jamdani</a>
+          <a href="#">Festive Edit</a>
         </div>
         <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Track Order</a><a href="#">Shipping Policy</a
+          ><a href="#">Returns & Exchange</a
+          ><a href="#">Size & Care Guide</a><a href="#">Contact Us</a>
+        </div>
+        <div class="footer-col newsletter-card">
           <h4>Newsletter</h4>
-          <p>Stories & exclusives</p>
-          <input class="newsletter-input" placeholder="e-mail" /><button
+          <p>Get first access to drops, styling notes, and festive offers.</p>
+          <input class="newsletter-input" id="newsletterInput" placeholder="your e-mail" /><button
             class="subscribe-btn"
+            id="subscribeBtn"
+            type="button"
           >
             Subscribe
           </button>
+          <div class="newsletter-note" id="newsletterNote"></div>
         </div>
         <div class="footer-col">
-          <h4>About</h4>
-          <p>Weaving Bengal's heritage.</p>
+          <h4>Visit</h4>
+          <p>Kolkata Studio</p>
+          <p>Mon-Sat, 11 AM - 8 PM</p>
           <p>Toll Free: 1800-123-4567</p>
           <p>hello@brajabuli.in</p>
         </div>
       </div>
+      <div class="footer-service-strip">
+        <div class="service-item"><strong>Free Shipping</strong><span>On first 40 orders</span></div>
+        <div class="service-item"><strong>WhatsApp Help</strong><span>Styling and order support</span></div>
+        <div class="service-item"><strong>COD Available</strong><span>Selected pincodes</span></div>
+        <div class="service-item"><strong>Gift Ready</strong><span>Premium festive packing</span></div>
+      </div>
       <div class="footer-bottom">
         <div class="social-links">
-          <a href="#">Facebook</a><a href="#">Instagram</a
+          <a href="#">Instagram</a><a href="#">Facebook</a
           ><a href="#">Pinterest</a><a href="#">YouTube</a>
         </div>
         <p class="copyright">© 2026 BrajaBuli — Dipped in Love.</p>
         <p class="tagline">Handwoven with grace ♥</p>
+        <button class="back-top" id="backTop" type="button">Back To Top</button>
+      </div>
       </div>
     </footer>
     <!-- <a href=""></a> -->
@@ -1772,7 +1995,34 @@
         },
       ];
 
+      const productMeta = [
+        ["Banarasi Silk", "included", true],
+        ["Tussar & Matka", "included", true],
+        ["Cotton Jamdani", "not-included", true],
+        ["Tussar & Matka", "included", true],
+        ["Banarasi Silk", "not-included", true],
+        ["Cotton Jamdani", "included", true],
+        ["Cotton Jamdani", "not-included", true],
+        ["Tussar & Matka", "included", false],
+        ["Banarasi Silk", "included", true],
+        ["Tussar & Matka", "not-included", true],
+        ["Banarasi Silk", "included", true],
+        ["Cotton Jamdani", "included", true],
+        ["Cotton Jamdani", "not-included", false],
+        ["Banarasi Silk", "included", true],
+      ];
+
+      products.forEach((product, idx) => {
+        const [category, blouse, inStock] = productMeta[idx];
+        product.category = category;
+        product.blouse = blouse;
+        product.inStock = inStock;
+        product.createdOrder = idx;
+      });
+
       const cart = [];
+      let activeSort = "featured";
+      let searchQuery = "";
 
       function formatPrice(value) {
         return `₹${value.toLocaleString()}`;
@@ -1896,12 +2146,85 @@
         }, 1100);
       }
 
+      function getCheckedValues(filterName) {
+        return [...document.querySelectorAll(`[data-filter="${filterName}"]:checked`)].map(
+          (input) => input.value,
+        );
+      }
+
+      function productMatchesPrice(product, priceFilters) {
+        if (!priceFilters.length) return true;
+        return priceFilters.some((range) => {
+          if (range === "under-5000") return product.price < 5000;
+          if (range === "5000-8000") return product.price >= 5000 && product.price <= 8000;
+          if (range === "above-8000") return product.price > 8000;
+          return true;
+        });
+      }
+
+      function getVisibleProducts() {
+        const stockOnly = document.getElementById("inStockCheck")?.checked;
+        const priceFilters = getCheckedValues("price");
+        const categoryFilters = getCheckedValues("category");
+        const blouseFilters = getCheckedValues("blouse");
+        const query = searchQuery.trim().toLowerCase();
+
+        const visible = products
+          .map((product, idx) => ({ product, idx }))
+          .filter(({ product }) => {
+            const matchesSearch =
+              !query ||
+              product.name.toLowerCase().includes(query) ||
+              product.category.toLowerCase().includes(query);
+            const matchesStock = !stockOnly || product.inStock;
+            const matchesPrice = productMatchesPrice(product, priceFilters);
+            const matchesCategory =
+              !categoryFilters.length || categoryFilters.includes(product.category);
+            const matchesBlouse =
+              !blouseFilters.length || blouseFilters.includes(product.blouse);
+            return (
+              matchesSearch &&
+              matchesStock &&
+              matchesPrice &&
+              matchesCategory &&
+              matchesBlouse
+            );
+          });
+
+        visible.sort((a, b) => {
+          if (activeSort === "price-low") return a.product.price - b.product.price;
+          if (activeSort === "price-high") return b.product.price - a.product.price;
+          if (activeSort === "rating") return b.product.rating - a.product.rating;
+          if (activeSort === "newest") return b.product.createdOrder - a.product.createdOrder;
+          return a.idx - b.idx;
+        });
+
+        return visible;
+      }
+
+      function updateProductMeta(visibleCount) {
+        const count = document.getElementById("productCount");
+        const searchMeta = document.getElementById("searchMeta");
+        if (count) count.textContent = `${visibleCount} heirloom silk${visibleCount === 1 ? "" : "s"}`;
+        if (searchMeta) {
+          searchMeta.textContent = searchQuery
+            ? `${visibleCount} result${visibleCount === 1 ? "" : "s"} found`
+            : `Showing ${visibleCount} of ${products.length} products`;
+        }
+      }
+
       function renderProducts() {
         const grid = document.getElementById("productGrid");
         if (!grid) return;
-        grid.innerHTML = products
+        const visibleProducts = getVisibleProducts();
+        updateProductMeta(visibleProducts.length);
+        if (!visibleProducts.length) {
+          grid.innerHTML = '<div class="no-results">No products match these filters.</div>';
+          return;
+        }
+        grid.innerHTML = visibleProducts
           .map(
-            (p, idx) => `
+            ({ product: p, idx }) => `
       <div class="product-card" data-product-idx="${idx}">
         <div class="card-img-wrap">
           ${
@@ -1983,30 +2306,22 @@
             e.stopPropagation();
             const chk = document.getElementById("inStockCheck");
             if (chk) chk.checked = false;
+            renderProducts();
           });
+        document.querySelectorAll("[data-filter]").forEach((input) => {
+          input.addEventListener("change", renderProducts);
+        });
       }
 
       function initSearch() {
         const panel = document.getElementById("searchPanel");
         const input = document.getElementById("searchInput");
-        const meta = document.getElementById("searchMeta");
         const searchButton = document.getElementById("searchButton");
         const searchClose = document.getElementById("searchClose");
 
         function applySearch() {
-          const query = input.value.trim().toLowerCase();
-          let visible = 0;
-          document.querySelectorAll(".product-card").forEach((card) => {
-            const idx = Number(card.dataset.productIdx);
-            const product = products[idx];
-            const matches =
-              !query || product.name.toLowerCase().includes(query);
-            card.style.display = matches ? "" : "none";
-            if (matches) visible += 1;
-          });
-          meta.textContent = query
-            ? `${visible} result${visible === 1 ? "" : "s"} found`
-            : `Showing all ${products.length} products`;
+          searchQuery = input?.value || "";
+          renderProducts();
         }
 
         searchButton?.addEventListener("click", () => {
@@ -2021,6 +2336,32 @@
           applySearch();
         });
         input?.addEventListener("input", applySearch);
+      }
+
+      function initSort() {
+        const sortWrap = document.getElementById("sortWrap");
+        const sortButton = document.getElementById("sortButton");
+
+        sortButton?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          sortWrap?.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".sort-option").forEach((option) => {
+          option.addEventListener("click", () => {
+            activeSort = option.dataset.sort || "featured";
+            document.querySelectorAll(".sort-option").forEach((btn) => {
+              btn.classList.toggle("active", btn === option);
+            });
+            if (sortButton) sortButton.textContent = `${option.textContent} ▾`;
+            sortWrap?.classList.remove("active");
+            renderProducts();
+          });
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!sortWrap?.contains(e.target)) sortWrap?.classList.remove("active");
+        });
       }
 
       function initCart() {
@@ -2056,6 +2397,27 @@
         updateCartCount();
       }
 
+      function initFooter() {
+        const emailInput = document.getElementById("newsletterInput");
+        const subscribeBtn = document.getElementById("subscribeBtn");
+        const note = document.getElementById("newsletterNote");
+        const backTop = document.getElementById("backTop");
+
+        subscribeBtn?.addEventListener("click", () => {
+          const email = emailInput?.value.trim() || "";
+          if (!email || !email.includes("@")) {
+            if (note) note.textContent = "Add a valid email to join the list.";
+            return;
+          }
+          if (note) note.textContent = "You're in. New drops will find you first.";
+          if (emailInput) emailInput.value = "";
+        });
+
+        backTop?.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
       let totalSec = 3 * 3600 + 33 * 60 + 34;
       function updateCountdown() {
         if (totalSec <= 0) return;
@@ -2085,7 +2447,9 @@
       renderProducts();
       initFilters();
       initSearch();
+      initSort();
       initCart();
+      initFooter();
       setView("grid-3");
     </script>
   </body>
