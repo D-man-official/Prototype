@@ -15,24 +15,27 @@
   }
 
   :root {
-    --cream: #fef8f0;
+    --cream: #fbf5ed;
     --deep-charcoal: #1e1a16;
     --soft-black: #2c241e;
-    --gold: #b88635;
-    --burnt-orange: #e5621e;
+    --gold: #a77932;
+    --burnt-orange: #c6531b;
     --mushroom: #8f7a68;
     --muted-stone: #6b5e54;
-    --border-light: #f0e4d8;
+    --border-light: #eadccd;
     --card-white: #ffffff;
-    --shadow-sm: 0 8px 18px -6px rgba(0, 0, 0, 0.04);
-    --shadow-hover: 0 20px 28px -12px rgba(0, 0, 0, 0.12);
+    --shadow-sm: 0 10px 24px -18px rgba(50, 35, 20, 0.42);
+    --shadow-hover: 0 22px 38px -22px rgba(50, 35, 20, 0.46);
   }
 
   body {
     font-family: 'Josefin Sans', sans-serif;
-    background: var(--cream);
+    background:
+      linear-gradient(180deg, rgba(255, 252, 247, 0.72), rgba(251, 245, 237, 0) 260px),
+      var(--cream);
     color: var(--deep-charcoal);
     line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* compact countdown */
@@ -80,20 +83,68 @@
 
   /* promo strip smaller */
   .promo-strip {
-    background: var(--burnt-orange);
+    background: linear-gradient(90deg, #9d3d17, var(--burnt-orange), #b9792b);
     color: #fff8ef;
     text-align: center;
-    padding: 6px 12px;
+    padding: 8px 12px;
     font-size: 10px;
-    letter-spacing: 2.5px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  .promo-strip::before,
+  .promo-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 70px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .promo-strip::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(157, 61, 23, 0.95), rgba(157, 61, 23, 0));
+  }
+  .promo-strip::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(185, 121, 43, 0.95), rgba(185, 121, 43, 0));
+  }
+  .promo-text {
+    display: inline-flex;
+    justify-content: center;
+    min-width: min(100%, 720px);
+    position: relative;
+    z-index: 2;
+  }
+  .promo-char {
+    display: inline-block;
+    transform-origin: center;
+    animation: promoLetterFold 5.2s cubic-bezier(.55, 0, .25, 1) infinite;
+    animation-delay: var(--delay);
+    will-change: transform, opacity;
+  }
+  .promo-char.space {
+    width: .62em;
+  }
+  @keyframes promoLetterFold {
+    0%, 50%, 100% {
+      opacity: 1;
+      transform: translateX(0) scaleX(1);
+    }
+    18%, 34% {
+      opacity: .84;
+      transform: translateX(var(--pull)) scaleX(.72);
+    }
   }
 
   /* navbar */
   .navbar {
     background: rgba(255, 250, 244, 0.96);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
@@ -132,7 +183,7 @@
     text-decoration: none;
     font-size: 10px;
     letter-spacing: 1.8px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--soft-black);
     text-transform: uppercase;
   }
@@ -143,6 +194,11 @@
     stroke: var(--deep-charcoal);
     stroke-width: 1.4;
     cursor: pointer;
+    transition: stroke 0.2s ease, transform 0.2s ease;
+  }
+  .nav-icons svg:hover {
+    stroke: var(--gold);
+    transform: translateY(-1px);
   }
 
   /* main wrapper compact */
@@ -152,11 +208,12 @@
     padding: 28px 20px 20px 20px;
   }
   .page-title {
-    font-size: 26px;
+    font-size: 30px;
     font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     margin-bottom: 28px;
     text-align: center;
+    font-weight: 500;
   }
   .page-title::after {
     content: '';
@@ -174,9 +231,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 12px;
+    background: rgba(255, 252, 247, 0.72);
+    border: 1px solid rgba(234, 220, 205, 0.8);
+    border-radius: 8px;
+    padding: 10px 12px;
     margin-bottom: 24px;
+    box-shadow: 0 10px 26px -24px rgba(50, 35, 20, 0.55);
   }
   .view-icons {
     display: flex;
@@ -187,7 +247,7 @@
     height: 32px;
     display: grid;
     place-items: center;
-    background: transparent;
+    background: #fffaf4;
     border: 1px solid #e2dbd2;
     border-radius: 8px;
     cursor: pointer;
@@ -204,6 +264,8 @@
   .product-count {
     font-size: 11px;
     color: var(--muted-stone);
+    letter-spacing: .6px;
+    text-transform: uppercase;
   }
   .sort-btn {
     font-size: 10px;
@@ -211,6 +273,8 @@
     background: none;
     border: none;
     cursor: pointer;
+    color: var(--deep-charcoal);
+    font-weight: 600;
   }
 
   /* shop body: filters + grid */
@@ -224,9 +288,11 @@
   .filters {
     width: 240px;
     flex-shrink: 0;
-    background: rgba(255, 250, 244, 0.4);
-    border-radius: 16px;
-    padding: 4px 4px 4px 0;
+    background: rgba(255, 252, 247, 0.64);
+    border: 1px solid rgba(234, 220, 205, 0.74);
+    border-radius: 8px;
+    padding: 8px 12px;
+    align-self: flex-start;
   }
   .filter-group {
     border-bottom: 1px solid var(--border-light);
@@ -234,8 +300,8 @@
   }
   .filter-header {
     font-size: 11px;
-    letter-spacing: 1.5px;
-    font-weight: 500;
+    letter-spacing: 1.3px;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
@@ -269,8 +335,8 @@
   .product-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
     transition: all 0.2s;
   }
   /* list view styles */
@@ -302,21 +368,36 @@
   /* product card - compact */
   .product-card {
     background: var(--card-white);
-    border-radius: 16px;
+    border: 1px solid rgba(234, 220, 205, 0.66);
+    border-radius: 8px;
     overflow: hidden;
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     box-shadow: var(--shadow-sm);
     position: relative;
   }
   .product-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-hover);
+    border-color: rgba(167, 121, 50, 0.32);
   }
   .card-img-wrap {
     overflow: hidden;
     aspect-ratio: 4 / 5; /* shorter, less tall than 3/4 */
     position: relative;
-    background: #f0e7de;
+    background: #eee3d7;
+  }
+  .card-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58%, rgba(25, 18, 12, 0.18));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .product-card:hover .card-img-wrap::after {
+    opacity: 1;
   }
   .card-img {
     width: 100%;
@@ -347,12 +428,12 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background: var(--deep-charcoal);
+    background: rgba(31, 27, 23, 0.88);
     color: #f5e2ca;
-    font-size: 8px;
+    font-size: 7px;
     letter-spacing: 1px;
-    padding: 3px 8px;
-    border-radius: 30px;
+    padding: 4px 7px;
+    border-radius: 6px;
     font-weight: 600;
     z-index: 2;
   }
@@ -360,8 +441,8 @@
     position: absolute;
     top: 8px;
     right: 8px;
-    background: rgba(255, 252, 246, 0.9);
-    border: none;
+    background: rgba(255, 252, 246, 0.94);
+    border: 1px solid rgba(234, 220, 205, 0.68);
     border-radius: 100%;
     width: 28px;
     height: 28px;
@@ -385,11 +466,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(28, 24, 20, 0.9);
+    border: none;
+    background: rgba(28, 24, 20, 0.92);
     backdrop-filter: blur(6px);
     color: #ffefde;
     text-align: center;
-    padding: 8px;
+    padding: 9px 8px;
     font-size: 9px;
     letter-spacing: 2px;
     font-weight: 500;
@@ -403,14 +485,14 @@
     transform: translateY(0);
   }
   .card-info {
-    padding: 10px 10px 12px;
+    padding: 12px 12px 14px;
   }
   .card-name {
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.2px;
     color: #2a221c;
     margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.35;
   }
   .rating {
@@ -420,7 +502,7 @@
     margin-bottom: 5px;
   }
   .stars {
-    color: #d4af37;
+    color: #bf8c21;
     font-size: 9px;
     letter-spacing: 1px;
   }
@@ -429,8 +511,8 @@
     color: #9b8b7c;
   }
   .card-price {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     letter-spacing: 0.3px;
   }
   .card-price .original {
@@ -535,10 +617,14 @@
       font-size: 18px;
     }
     .promo-strip {
-      padding: 6px 10px;
+      padding: 7px 10px;
       font-size: 8px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       line-height: 1.4;
+    }
+    .promo-strip::before,
+    .promo-strip::after {
+      width: 34px;
     }
     .navbar {
       height: 56px;
@@ -572,7 +658,7 @@
     }
     .toolbar {
       gap: 10px;
-      padding-bottom: 10px;
+      padding: 9px 10px;
       margin-bottom: 14px;
     }
     .view-icons {
@@ -650,7 +736,7 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .product-card {
-      border-radius: 12px;
+      border-radius: 8px;
       box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.18);
     }
     .card-img-wrap {
@@ -686,7 +772,7 @@
       background: rgba(28, 24, 20, 0.82);
     }
     .card-info {
-      padding: 8px 8px 10px;
+      padding: 9px 8px 10px;
     }
     .card-name {
       font-size: 10px;
@@ -727,6 +813,7 @@
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
+      border-radius: 8px;
     }
     .product-count {
       text-align: center;
@@ -759,6 +846,16 @@
       overflow-y: auto;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .promo-char,
+    .card-img,
+    .product-card,
+    .nav-icons svg {
+      animation: none;
+      transition: none;
+    }
+  }
 </style>
 </head>
 <body>
@@ -773,7 +870,7 @@
     <div class="countdown-block"><div class="num" id="sec">34</div><div class="label">SEC</div></div>
   </div>
 </div>
-<div class="promo-strip">✦ FREE SHIPPING ON FIRST 40 ORDERS ✦ HANDLOOM EDITION ✦</div>
+<div class="promo-strip"><span class="promo-text" id="promoText">✦ FREE SHIPPING ON FIRST 40 ORDERS ✦ HANDLOOM EDITION ✦</span></div>
 
 <nav class="navbar">
   <a href="#" class="logo">BrajaBuli<sup>new</sup></a>
@@ -832,6 +929,25 @@
 <!-- <a href=""></a> -->
 
 <script>
+  function initPromoAnimation() {
+    const promo = document.getElementById('promoText');
+    if (!promo || promo.dataset.animated === 'true') return;
+
+    const text = promo.textContent;
+    const chars = [...text];
+    promo.textContent = '';
+    chars.forEach((char, idx) => {
+      const span = document.createElement('span');
+      const fromEnd = chars.length - idx - 1;
+      span.className = `promo-char${char === ' ' ? ' space' : ''}`;
+      span.textContent = char === ' ' ? '\u00a0' : char;
+      span.style.setProperty('--delay', `${fromEnd * 0.035}s`);
+      span.style.setProperty('--pull', `${Math.max(idx * -0.018, -0.95)}em`);
+      promo.appendChild(span);
+    });
+    promo.dataset.animated = 'true';
+  }
+
   const products = [
     { name: "Riyasat Silk Banarasi — Copper Mauve", original: 8500, price: 6299, discount: "26% off", rating: 4.8, reviews: 142, img: "./img/Gamcha.jpg", imgClass: "p1" },
     { name: "Zari Tussar Silk — Golden Dusk", original: 9200, price: 6999, discount: "24% off", rating: 4.9, reviews: 98, img: "./img/Saree 10.jpg", imgClass: "p2" },
@@ -860,8 +976,8 @@
             : `<div class="card-img ${p.imgClass}"></div>`
           }
           <span class="badge">Bestseller</span>
-          <button class="wish-btn"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-          <div class="hover-add-btn">ADD TO CART</div>
+          <button class="wish-btn" type="button" aria-label="Add ${p.name} to wishlist"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+          <button class="hover-add-btn" type="button">ADD TO CART</button>
         </div>
         <div class="card-info">
           <div class="card-name">${p.name}</div>
@@ -952,6 +1068,7 @@
     });
   });
 
+  initPromoAnimation();
   renderProducts();
   initFilters();
   setView('grid-3');
